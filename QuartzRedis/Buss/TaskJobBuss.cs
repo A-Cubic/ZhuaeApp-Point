@@ -19,6 +19,8 @@ namespace QuartzRedis.Buss
         public void doWork(string ids)
         {
             updateUserInfo();
+            updateCommit();
+            getCommit();
         }
 
         /// <summary>
@@ -160,10 +162,8 @@ namespace QuartzRedis.Buss
 
         private string getRemoteParam(Param param, string name, string code)
         {
-            //string appId = Global.AppId;
-            //string appSecret = Global.AppSecret;
-            string appId = "sd67a0kw02de";
-            string appSecret = "sdjah8a9asdhdals923";
+            string appId = Global.AppId;
+            string appSecret = Global.AppSecret;
             //string code = "1";
             string placeHold = Global.PlaceHold;
             string nonceStr = DateTime.Now.ToString("MMddHHmmss");

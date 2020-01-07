@@ -13,13 +13,13 @@ namespace QuartzRedis
             {
                 DatabaseOperationWeb.TYPE = new DBManagerZE();
             }
-            //TaskJob.Worker();
-            //TaskJob.Subscribe();
-            //Console.ReadLine();
-            TaskJobBuss taskJobBuss = new TaskJobBuss();
-            taskJobBuss.updateUserInfo();
-            taskJobBuss.updateCommit();
-            taskJobBuss.getCommit();
+            TaskJob.Worker();
+            TaskJob.Subscribe();
+            Console.ReadLine();
+            //TaskJobBuss taskJobBuss = new TaskJobBuss();
+            //taskJobBuss.updateUserInfo();
+            //taskJobBuss.updateCommit();
+            //taskJobBuss.getCommit();
         }
     }
 }
