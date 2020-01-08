@@ -17,7 +17,7 @@ namespace QuartzRedis.Buss
     {
         public void doWork(string ids)
         {
-            Console.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm") + "> " + "开始处理" + Global.TASK_JOB + ":" + ids);
+            Console.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm") + "> " + "开始处理" + Global.TASK_JOB + ": " + ids);
             TaskJobDao taskJobDao = new TaskJobDao();
 
             Console.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm") + "> " + "开始处理updateUserInfo");
