@@ -1,26 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 using Com.ACBC.Framework.Database;
+
 namespace QuartzRedis.Common
 {
-    public class DBManagerZE : IType
+    class DBManagerZE : IType
     {
         private DBType dbt;
         private string str = "";
 
         public DBManagerZE()
         {
-            var url = System.Environment.GetEnvironmentVariable("ZEMysqlDBUrl", EnvironmentVariableTarget.User);
-            var uid = System.Environment.GetEnvironmentVariable("ZEMysqlDBUser", EnvironmentVariableTarget.User);
-            var port = System.Environment.GetEnvironmentVariable("ZEMysqlDBPort", EnvironmentVariableTarget.User);
-            var passd = System.Environment.GetEnvironmentVariable("ZEMysqlDBPassword", EnvironmentVariableTarget.User);
-
-            this.str = "Server=" + url
-                     + ";Port=" + port
-                     + ";Database=dolldb;Uid=" + uid
-                     + ";Pwd=" + passd
+            this.str = "Server=" + Global.ZEDBUrl
+                     + ";Port=" + Global.ZEDBPort
+                     + ";Database=dolldb;Uid=" + Global.ZEDBUser
+                     + ";Pwd=" + Global.ZEDBPassword
                      + ";CharSet=utf8mb4; SslMode =none;";
-
-            Console.Write(this.str);
             this.dbt = DBType.Mysql;
         }
 
@@ -46,4 +42,3 @@ namespace QuartzRedis.Common
         }
     }
 }
-

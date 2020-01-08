@@ -1,6 +1,4 @@
 ﻿using Com.ACBC.Framework.Database;
-using QuartzRedis.Buss;
-using QuartzRedis.Common;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,7 +7,7 @@ using System.Text;
 
 namespace QuartzRedis.Dao
 {
-    class SqlDao
+    public class TaskJobDao
     {
         public List<AddMemberInfoParam> getAddMemberInfoParam()
         {
@@ -23,7 +21,7 @@ namespace QuartzRedis.Dao
                 foreach (DataRow dr in dt.Rows)
                 {
                     AddMemberInfoParam param = new AddMemberInfoParam
-                    { 
+                    {
                         phone = dr["CHAT_USER_ID"].ToString(),
                         point = dr["LAVEPOINT"].ToString(),
                         cardCode = dr["USER_ID"].ToString(),
@@ -32,7 +30,7 @@ namespace QuartzRedis.Dao
                 }
             }
             return list;
-        } 
+        }
 
 
         public List<UserPointParam> getChange()
@@ -73,7 +71,7 @@ namespace QuartzRedis.Dao
             }
             return score;
         }
-        public void updateUserPoint(string userId, int point,int newPoint,int oldPoint)
+        public void updateUserPoint(string userId, int point, int newPoint, int oldPoint)
         {
             ArrayList list = new ArrayList();
             StringBuilder builder = new StringBuilder();
@@ -108,7 +106,7 @@ namespace QuartzRedis.Dao
         {
             ArrayList list = new ArrayList();
             StringBuilder builder = new StringBuilder();
-            builder.AppendFormat(ShipSqls.INSERT_POINTLOG, userId, oldPoint, newPoint,point);
+            builder.AppendFormat(ShipSqls.INSERT_POINTLOG, userId, oldPoint, newPoint, point);
             string sql = builder.ToString();
             DatabaseOperationWeb.ExecuteDML(sql);
         }
@@ -135,7 +133,7 @@ namespace QuartzRedis.Dao
                                       "FROM F_BALANCE F,U_USER U " +
                                       "WHERE F.USER_ID = U.USER_ID " +
                                       "AND U.IF_ADD_MEMBER = 1 " +
-                                      "AND U.LAVEPOINT <> F.LAVEPOINT"; 
+                                      "AND U.LAVEPOINT <> F.LAVEPOINT";
             public const string UPDATE_USER_CHANGE_POINT = "" +
                                       "UPDATE U_USER " +
                                       "SET LAVEPOINT={1} " +

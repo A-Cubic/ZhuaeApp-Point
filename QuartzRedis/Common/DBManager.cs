@@ -1,7 +1,5 @@
 ﻿using Com.ACBC.Framework.Database;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace QuartzRedis.Common
 {
@@ -12,18 +10,11 @@ namespace QuartzRedis.Common
 
         public DBManager()
         {
-            var url = System.Environment.GetEnvironmentVariable("MysqlDBUrl");
-            var uid = System.Environment.GetEnvironmentVariable("MysqlDBUser");
-            var port = System.Environment.GetEnvironmentVariable("MysqlDBPort");
-            var passd = System.Environment.GetEnvironmentVariable("MysqlDBPassword");
-
-            this.str = "Server=" + url
-                     + ";Port=" + port
-                     + ";Database=zhuae;Uid=" + uid
-                     + ";Pwd=" + passd
+            this.str = "Server=" + Global.DBUrl
+                     + ";Port=" + Global.DBPort
+                     + ";Database=dolldb;Uid=" + Global.DBUser
+                     + ";Pwd=" + Global.DBPassword
                      + ";CharSet=utf8mb4; SslMode =none;";
-
-            Console.Write(this.str);
             this.dbt = DBType.Mysql;
         }
 

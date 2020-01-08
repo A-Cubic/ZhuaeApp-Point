@@ -9,17 +9,11 @@ namespace QuartzRedis
     {
         static void Main(string[] args)
         {
-            if (DatabaseOperationWeb.TYPE == null)
-            {
-                DatabaseOperationWeb.TYPE = new DBManagerZE();
-            }
-            TaskJob.Worker();
+            Global.Startup();
+            TaskJobBuss taskJobBuss = new TaskJobBuss();
+            taskJobBuss.doWork("");
             TaskJob.Subscribe();
             Console.ReadLine();
-            //TaskJobBuss taskJobBuss = new TaskJobBuss();
-            //taskJobBuss.updateUserInfo();
-            //taskJobBuss.updateCommit();
-            //taskJobBuss.getCommit();
         }
     }
 }

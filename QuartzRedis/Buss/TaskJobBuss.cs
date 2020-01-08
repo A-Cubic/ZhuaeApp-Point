@@ -6,11 +6,10 @@ using StackExchange.Redis;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
-using static QuartzRedis.Dao.SqlDao;
+using static QuartzRedis.Dao.TaskJobDao;
 
 namespace QuartzRedis.Buss
 {
@@ -18,11 +17,16 @@ namespace QuartzRedis.Buss
     {
         public void doWork(string ids)
         {
+            Console.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm") + "> " + "开始处理" + Global.TASK_JOB + ":" + ids);
+            TaskJobDao taskJobDao = new TaskJobDao();
+
+            Console.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm") + "> " + "开始处理updateUserInfo");
             updateUserInfo();
+            Console.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm") + "> " + "开始处理updateCommit");
             updateCommit();
+            Console.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm") + "> " + "开始处理getCommit");
             getCommit();
         }
-
         /// <summary>
         /// 上传用户信息
         /// </summary>
@@ -30,7 +34,7 @@ namespace QuartzRedis.Buss
         {
             try
             {
-                SqlDao sqlDao = new SqlDao();
+                TaskJobDao sqlDao = new TaskJobDao();
                 List<AddMemberInfoParam> paramList = sqlDao.getAddMemberInfoParam();
                 if (paramList.Count == 0)
                 {
@@ -63,7 +67,7 @@ namespace QuartzRedis.Buss
         {
             try
             {
-                SqlDao sqlDao = new SqlDao();
+                TaskJobDao sqlDao = new TaskJobDao();
                 ArrayList list = new ArrayList();
                 //处理玩偶兑换积分
                 List<UserPointParam> gList = sqlDao.getChange();
@@ -100,7 +104,7 @@ namespace QuartzRedis.Buss
         {
             try
             {
-                SqlDao sqlDao = new SqlDao();
+                TaskJobDao sqlDao = new TaskJobDao();
                 string st = getRemoteParam(new Param(), "GetPointCommitList", "5");
                 string result = HttpHandle.PostHttps(Global.PostUrl, st, "application/json");
                 ReturnItem ri = JsonConvert.DeserializeObject<ReturnItem>(result);
@@ -115,7 +119,7 @@ namespace QuartzRedis.Buss
                                 try
                                 {
                                     string userId = sqlDao.getUserIdByPhone(ri.data[i].phone);
-                                    if (userId!=null)
+                                    if (userId != null)
                                     {
                                         int rPoint = Convert.ToInt32(ri.data[i].point);
                                         int oldPoint = sqlDao.getMemberTotalScore(ri.data[i].phone);
@@ -140,11 +144,11 @@ namespace QuartzRedis.Buss
                                             Console.WriteLine("UpdatePointCommit:" + result1);
                                         }
                                     }
-                                    
+
                                 }
                                 catch (Exception)
                                 {
-                                    
+
                                 }
                             }
                         }
@@ -198,7 +202,6 @@ namespace QuartzRedis.Buss
 
             return JsonConvert.SerializeObject(postParam);
         }
-
 
     }
 }
