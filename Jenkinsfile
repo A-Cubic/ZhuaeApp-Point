@@ -19,9 +19,9 @@ docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" "$REGISTRY_URL" && dock
   }
   environment {
     REGISTRY_URL = 'registry.cn-qingdao.aliyuncs.com'
-    REGISTRY_IMAGE = 'a-cubic/ZhuaeApp-Point'
+    REGISTRY_IMAGE = 'a-cubic/zhuaeapp-point'
     DOCKER_USERNAME_USR = 'credentials(\'Docker_Push\')'
     DOCKER_PASSWORD_PSW = 'credentials(\'Docker_Push\')'
-    CACHE = 'ZhuaeApp-Point'
+    CACHE = 'zhuaeapp-point'
   }
 }
